@@ -14,7 +14,7 @@ padalign.lua
 This will take some text on multiple lines and pad out the words so they align vertically. Like the text below.
 
 useful for layout of repetitive data in code.
-
+```
 Lorem      Ipsum        is        simply      dummy      text       of         the         printing  and       typesetting
 industry.  Lorem        Ipsum     has         been       the        industry's standard    dummy     text      ever       
 since      the          1500s,    when        an         unknown    printer    took        a         galley    of         
@@ -24,4 +24,4 @@ electronic typesetting, remaining essentially unchanged. It         was        p
 with       the          release   of          Letraset   sheets     containing Lorem       Ipsum     passages, and        
 more       recently     with      desktop     publishing software   like       Aldus       PageMaker including versions   
 of         Lorem        Ipsum.   
-
+```
