@@ -18,7 +18,6 @@ of         Lorem        Ipsum.
 
 --]]
 
-local s=geany.selection()
 
 -- simple hacky split
 local split=function(str,pat)
@@ -58,6 +57,7 @@ end
 
 
 -- apply to selected text only
+local s=geany.selection()
 if s then
 	if s~="" then
 		geany.selection(f(s))
