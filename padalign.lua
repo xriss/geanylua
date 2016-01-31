@@ -6,15 +6,16 @@ This will take some text on multiple lines and pad out the words so they align v
 
 useful for layout of repetitive data in code.
 
-Lorem      Ipsum        is        simply      dummy      text       of         the         printing  and       typesetting
-industry.  Lorem        Ipsum     has         been       the        industry's standard    dummy     text      ever       
-since      the          1500s,    when        an         unknown    printer    took        a         galley    of         
-type       and          scrambled it          to         make       a          type        specimen  book.     It         
-has        survived     not       only        five       centuries, but        also        the       leap      into       
-electronic typesetting, remaining essentially unchanged. It         was        popularised in        the       1960s      
-with       the          release   of          Letraset   sheets     containing Lorem       Ipsum     passages, and        
-more       recently     with      desktop     publishing software   like       Aldus       PageMaker including versions   
-of         Lorem        Ipsum.   
+
+    Lorem      Ipsum        is        simply      dummy      text       of         the         printing  and       typesetting
+    industry.  Lorem        Ipsum     has         been       the        industry's standard    dummy     text      ever
+    since      the          1500s,    when        an         unknown    printer    took        a         galley    of
+    type       and          scrambled it          to         make       a          type        specimen  book.     It
+    has        survived     not       only        five       centuries, but        also        the       leap      into
+    electronic typesetting, remaining essentially unchanged. It         was        popularised in        the       1960s
+    with       the          release   of          Letraset   sheets     containing Lorem       Ipsum     passages, and
+    more       recently     with      desktop     publishing software   like       Aldus       PageMaker including versions
+    of         Lorem        Ipsum.
 
 --]]
 
@@ -32,14 +33,19 @@ end
 local f=function(s)
     local lines=split(s)
     
+    local indent
     local w={} -- build biggest widths
     for i,v in ipairs(lines) do
+	if not indent then -- use first lines indent
+	    indent=v:match("^[%s]*")
+	end
         local a=split(v,"([^%s]+)")
         for i,v in ipairs(a) do
             w[i]=w[i] or 0 -- make sure the width exists
             if w[i] < #v then w[i]=#v end -- store new width if its wider
         end
     end
+    indent=indent or "" -- make sure indent is valid
 
     local t={} -- pad each word to the maximum width
     for i,v in ipairs(lines) do
@@ -49,10 +55,10 @@ local f=function(s)
                 a[i] = v..string.rep(" ",w[i]-#v)
             end
         end
-        t[#t+1]=table.concat(a," ")
+        t[#t+1]=(table.concat(a," "):gsub("^%s*(.-)%s*$", "%1")) -- join and trim white space
     end
     
-	return table.concat(t,"\n").."\n"
+    return indent..table.concat(t,"\n"..indent).."\n"
 end
 
 
